@@ -9,10 +9,6 @@ from matplotlib.animation import PillowWriter
 
 
 
-
-
-
-
 class Planet:
 
     def __init__(self, x, y, x_vel, y_vel, mass, color):
@@ -22,16 +18,12 @@ class Planet:
         self.y_vel = y_vel
         self.mass = mass
         self.color = color
-
         self.orbit = []
 
 #sun = Planet(x-Koordiante (vom Ursprung), y-Koordinate (vom Ursprung), x-Geschwindigkeit (in m/s), y-Geschwindigkeit (in m/s), Masse (kg), Farbe)
 sun = Planet(0, 0, 0, 0, 1.989e30, "yellow") #Sonne
 earth = Planet(149.6e9, 0, 0, 30e8, 5.972e24, "blue") #Erde
 Objekt = Planet(227.9e9, 0, 0, 24e8, 6.39e23, "orange") #Mars
-
-
-
 
 
 fig = plt.figure(figsize=(6.4*1.5, 4.8*1.5) )
@@ -58,15 +50,12 @@ lb1, = plt.plot([], [], color=sun.color, marker="o")
 
 
 
-
-
 def dSdt(t, S):
 
     x1, y1, x2, y2, x3, y3, vx1, vy1, vx2, vy2, vx3, vy3 = S
     r12 = np.sqrt((x2-x1)**2 + (y2-y1)**2)
     r13 = np.sqrt((x3-x1)**2 + (y3-y1)**2)
     r23 = np.sqrt((x2-x3)**2 + (y2-y3)**2)
-
 
     return [ vx1,
             vy1,
@@ -97,19 +86,15 @@ x2 = sol.y[2]
 y2 = sol.y[3]
 x3 = sol.y[4]
 y3 = sol.y[5]
-#plt.plot(t, x1)
-#plt.show()
 
 
 def animate(i):
     ln1.set_data(x1[i], y1[i])
     ln2.set_data(x2[i], y2[i])
     ln3.set_data(x3[i], y3[i])
-
     lb1.set_data(x1[i], y1[i])
 
     return  ln1, ln2, ln3, lb1
-
 
 
 ani = animation.FuncAnimation(fig, animate, frames=1000, interval=50)
